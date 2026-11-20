@@ -3,7 +3,7 @@
 **This is a static, read-only demo snapshot of [TrumpVIX](https://github.com/JonPinto/trumpvix).**
 
 It is **not** the live application. Every post, market figure and reaction shown here was
-baked in when this snapshot was generated, and nothing on this site updates. There is no
+baked in when this snapshot was generated, and nothing about that data updates. There is no
 server, database or API behind it. For the full app — with a live database that refreshes —
 see the main repository:
 
@@ -13,15 +13,20 @@ see the main repository:
 |---|---|
 | App version | `v1.2` |
 | Snapshot version | `20.11.26` |
-| Data up to date as of | 20 Nov 2026, 08:43 UTC |
-| Generated | 2026-11-20T08:43:03+00:00 |
+| Data up to date as of | 20 Nov 2026, 09:01 UTC |
+| Generated | 2026-11-20T09:01:49+00:00 |
 
 ## Disclaimer
 
-This site is a static snapshot. The data was fetched once, from the same sources the live
-app uses — the trumpstruth.org RSS feed, Yahoo Finance (via `yfinance`), FRED, OpenGraph
-link previews and Wikimedia Commons — and frozen at the timestamp above. It does not
-refresh, and no server or API runs behind this page.
+This site is a static snapshot. The posts, market figures and reactions were fetched once,
+from the same sources the live app uses — the trumpstruth.org RSS feed, Yahoo Finance (via
+`yfinance`), FRED and OpenGraph link previews — and frozen at the timestamp above. They do
+not refresh, and no server or API runs behind this page.
+
+The **page backgrounds are the exception**: they are fetched live from
+[Wikimedia Commons](https://commons.wikimedia.org/) in your browser on every page load, so
+the picture changes each time you refresh. If Commons is unreachable, the page falls back to
+a background baked into this snapshot.
 
 Market data comes from Yahoo Finance via `yfinance` and from FRED. Yahoo data is
 unofficial, may be delayed, and can be revised or missing. FRED data is subject to
@@ -35,8 +40,8 @@ linked from its original source and may expire.
 ```
 index.html      The dashboard, with a demo banner at the top
 static/         Stylesheet and logo
-snapshot.js     The baked data (window.__SNAPSHOT__)
-demo.js         Fetch shim that answers /api/* from snapshot.js
+snapshot.js     The baked data (window.__SNAPSHOT__), including fallback backgrounds
+demo.js         Fetch shim that answers /api/* from snapshot.js, with live backgrounds
 netlify.toml    Static publish config (no build step)
 ```
 
