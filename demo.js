@@ -224,18 +224,29 @@
     return realFetch(input, init);
   };
 
-  function initUi() {
+  function initBanner() {
     const banner = document.getElementById("demoBanner");
-    if (banner) {
-      const link = snap.repo_url || "https://github.com/JonPinto/trumpvix";
-      const label = link.replace(/^https?:\/\//, "").replace(/\/$/, "");
-      banner.innerHTML =
-        '<span class="demo-banner-tag">Demo snapshot ' + snap.app_version + '</span> · ' +
-        'snapshot ' + snap.snapshot_version + ' — data up to date as of <strong>' +
-        snap.data_as_of + '</strong>. This is a static snapshot; the full app with a ' +
-        'live, updating database is at <a href="' + link + '" target="_blank" ' +
-        'rel="noreferrer">' + label + '</a>.';
-    }
+    if (!banner) return;
+    const link = snap.repo_url || "https://github.com/JonPinto/trumpvix";
+    const label = link.replace(/^https?:\/\//, "").replace(/\/$/, "");
+    banner.innerHTML =
+      '<span class="demo-banner-short">Demo snapshot ' + snap.app_version +
+        ' · ' + snap.snapshot_version + '</span>' +
+      '<span class="demo-banner-full">Demo snapshot <strong>' + snap.app_version +
+        '</strong> · snapshot ' + snap.snapshot_version + ' — static data as of <strong>' +
+        snap.data_as_of + '</strong>. Full app: ' +
+        '<a href="' + link + '" target="_blank" rel="noreferrer">' + label + '</a></span>';
+    // Fully visible for the first 30 seconds, then it fades back to a short label.
+    setTimeout(() => banner.classList.add("collapsed"), 30000);
+    // Touch devices have no hover; a tap toggles it instead.
+    banner.addEventListener("click", (e) => {
+      if (e.target.closest("a")) return;
+      banner.classList.toggle("collapsed");
+    });
+  }
+
+  function initUi() {
+    initBanner();
     // The refresh button has nothing to talk to in the snapshot.
     const refreshBtn = document.getElementById("refreshBtn");
     if (refreshBtn) {

@@ -13,8 +13,8 @@ see the main repository:
 |---|---|
 | App version | `v1.2` |
 | Snapshot version | `20.11.26` |
-| Data up to date as of | 20 Nov 2026, 09:01 UTC |
-| Generated | 2026-11-20T09:01:49+00:00 |
+| Data up to date as of | 20 Nov 2026, 09:14 UTC |
+| Generated | 2026-11-20T09:14:02+00:00 |
 
 ## Disclaimer
 

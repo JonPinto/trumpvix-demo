@@ -1,8 +1,8 @@
 window.__SNAPSHOT__ = {
   "app_version": "v1.2",
   "snapshot_version": "20.11.26",
-  "data_as_of": "20 Nov 2026, 09:01 UTC",
-  "generated_at": "2026-11-20T09:01:49+00:00",
+  "data_as_of": "20 Nov 2026, 09:14 UTC",
+  "generated_at": "2026-11-20T09:14:02+00:00",
   "repo_url": "https://github.com/JonPinto/trumpvix",
   "statements": [
     {
