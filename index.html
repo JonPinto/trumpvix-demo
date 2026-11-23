@@ -234,7 +234,9 @@
         for (const node of textNodes) {
           if (regex.test(node.nodeValue)) {
             const span = document.createElement("span");
-            span.innerHTML = node.nodeValue.replace(regex, '<mark class="highlight">$1</mark>');
+            // Escape the text before re-inserting it, so a crafted search term
+            // can never turn post text into markup.
+            span.innerHTML = escapeHtml(node.nodeValue).replace(regex, '<mark class="highlight">$1</mark>');
             node.parentNode.replaceChild(span, node);
           }
         }
@@ -906,6 +908,17 @@
         return res.json();
       }
 
+      // Refresh is a local control by default; hide the button when the server
+      // does not let this client trigger one.
+      function applyRefreshPermission(status) {
+        if (status && status.can_refresh) return;
+        const divider = refreshBtn.previousElementSibling;
+        if (divider && divider.classList.contains("search-divider")) {
+          divider.style.display = "none";
+        }
+        refreshBtn.style.display = "none";
+      }
+
       function setRefreshButton(state, title) {
         refreshBtn.classList.toggle("running", state === "running");
         refreshBtn.classList.toggle("failed", state === "failed");
@@ -960,6 +973,17 @@
         if (refreshWatching) return;
         try {
           const res = await fetch("/api/refresh", { method: "POST" });
+          if (res.status === 403) {
+            applyRefreshPermission(null);
+            setRefreshButton("idle", "Refreshing is limited to the server machine.");
+            return;
+          }
+          if (res.status === 429) {
+            const data = await res.json().catch(() => ({}));
+            const wait = data.retry_after_s ? ` ${data.retry_after_s}s` : "";
+            setRefreshButton("idle", `Please wait${wait} before refreshing again.`);
+            return;
+          }
           if (!res.ok) throw new Error("refresh failed to start");
         } catch (e) {
           setRefreshButton("failed", "Couldn't start a refresh. Click to retry.");
@@ -1009,6 +1033,7 @@
       loadBackground();
       // The server may already be refreshing (it starts one on boot); follow it if so.
       fetchRefreshStatus().then((status) => {
+        applyRefreshPermission(status);
         if (status.running) watchRefresh();
         else if (status.last_run) setRefreshButton("idle", `Data updated ${formatDateTime(status.last_run)}. Click to fetch latest.`);
       }).catch(() => {});
