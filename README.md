@@ -1,6 +1,5 @@
 # TrumpVIX — Demo Snapshot
 
-[the website](https://trumpvix-sh.netlify.app/)
 **This is a static, read-only demo snapshot of [TrumpVIX](https://github.com/JonPinto/trumpvix).**
 
 It is **not** the live application. Every post, market figure and reaction shown here was
@@ -13,9 +12,9 @@ see the main repository:
 | | |
 |---|---|
 | App version | `v1.2` |
-| Snapshot version | `20.11.26` |
-| Data up to date as of | 20 Nov 2026, 09:14 UTC |
-| Generated | 2026-11-20T09:14:02+00:00 |
+| Snapshot version | `23.11.26` |
+| Data up to date as of | 23 Nov 2026, 07:32 UTC |
+| Generated | 2026-11-23T07:32:27+00:00 |
 
 ## Disclaimer
 
