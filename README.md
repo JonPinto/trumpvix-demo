@@ -15,8 +15,8 @@ see the main repository:
 |---|---|
 | App version | `v1.2` |
 | Snapshot version | `23.11.26` |
-| Data up to date as of | 23 Nov 2026, 07:33 UTC |
-| Generated | 2026-11-23T07:33:24+00:00 |
+| Data up to date as of | 23 Nov 2026, 07:48 UTC |
+| Generated | 2026-11-23T07:48:09+00:00 |
 
 ## Disclaimer
 
